@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import path from 'path';
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 
 export const genDiff = (file1, file2) => {
+
   const keys1 = Object.keys(file1);
   const keys2 = Object.keys(file2);
   const keys = _.union(keys1, keys2);
@@ -24,8 +25,18 @@ export const genDiff = (file1, file2) => {
   return `{\n${result}\n}`;
 };
 
-export default (filepath1, filepath2) => {
-const parsing1 = JSON.parse(readFileSync(path.resolve(process.cwd(), filepath1)));
-const parsing2 = JSON.parse(readFileSync(path.resolve(process.cwd(), filepath2)));
-return genDiff(parsing1, parsing2);
-};
+const getPath = (filePath) => {
+    if (path.isAbsolute(filePath)) {
+      return filePath;
+    }
+    return path.resolve(process.cwd(), filePath).trim();
+  };
+
+const getFiles = (file1, file2) => {
+        const data1 = JSON.parse(readFileSync(getPath(file1)));
+        const data2 = JSON.parse(readFileSync(getPath(file2)));
+        return [data1, data2];
+      };
+      
+
+export { getPath, getFiles };
