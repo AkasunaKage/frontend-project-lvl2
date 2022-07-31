@@ -1,8 +1,19 @@
 import _ from 'lodash';
 import path from 'path';
-import { readFileSync } from 'node:fs';
+import fs from 'fs';
+import { parsers } from './parsers.js';
 
-export const genDiff = (file1, file2) => {
+
+const getFileFormat = (filepath) => filepath.split('.').reverse()[0];
+
+export const genDiff = (filepath1, filepath2) => {
+  const getPathFile = (filepath) => path.resolve(process.cwd(), filepath);
+  const readFile = (filepath) => fs.readFileSync(getPathFile(filepath), 'utf8');
+
+  const readingFilepath1 = readFile(filepath1);
+  const readingFilepath2 = readFile(filepath2);
+  const file1 = parsers(readingFilepath1, getFileFormat(filepath1));
+  const file2 = parsers(readingFilepath2, getFileFormat(filepath2));
 
   const keys1 = Object.keys(file1);
   const keys2 = Object.keys(file2);
@@ -24,19 +35,3 @@ export const genDiff = (file1, file2) => {
 
   return `{\n${result}\n}`;
 };
-
-const getPath = (filePath) => {
-    if (path.isAbsolute(filePath)) {
-      return filePath;
-    }
-    return path.resolve(process.cwd(), filePath).trim();
-  };
-
-const getFiles = (file1, file2) => {
-        const data1 = JSON.parse(readFileSync(getPath(file1)));
-        const data2 = JSON.parse(readFileSync(getPath(file2)));
-        return [data1, data2];
-      };
-      
-
-export { getPath, getFiles };
