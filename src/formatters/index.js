@@ -1,15 +1,17 @@
-import makeStylish from './stylish.js';
-import makePlain from './plain.js';
+import stylish from './stylish.js';
+import plain from './plain.js';
 
-const getFormat = (data, format, replacer) => {
-    switch (format) {
-      case 'stylish':
-        return makeStylish(data, replacer);
-        case 'plain':
-        return makePlain(data);
-      default:
-        throw new Error(`Invalid file format: '${format}'`);
-    }
-  };
+const getFormat = (data, format) => {
+  switch (format) {
+    case 'stylish':
+      return stylish(data);
+    case 'plain':
+      return plain(data);
+    case 'json':
+      return JSON.stringify(data);
+    default:
+      throw new Error(`Invalid file format: '${format}'. You can use only JSON and YAML`);
+  }
+};
 
   export default getFormat;

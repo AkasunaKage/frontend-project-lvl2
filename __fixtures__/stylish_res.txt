@@ -1,0 +1,44 @@
+{
+    common: {
+      + undefined: false
+        undefined: Value 1
+      - undefined: 200
+      - undefined: true
+      + undefined: null
+      + undefined: blah blah
+      + undefined: {
+            key5: value5
+        }
+        setting6: {
+            doge: {
+              - undefined: 
+              + undefined: so much
+            }
+            undefined: value
+          + undefined: vops
+        }
+    }
+    group1: {
+      - undefined: bas
+      + undefined: bars
+        undefined: bar
+      - undefined: {
+            key: value
+        }
+      + undefined: str
+    }
+  - undefined: {
+        abc: 12345
+        deep: {
+            id: 45
+        }
+    }
+  + undefined: {
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+        fee: 100500
+    }
+}

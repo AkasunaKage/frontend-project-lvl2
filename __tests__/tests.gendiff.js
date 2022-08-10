@@ -18,6 +18,8 @@ const expectedStylish = readFile('stylish_res.txt');
 
 const expectedPlain = readFile('plain_res.txt');
 
+const expectedJson = readFile('json_res.txt');
+
 const formatsFiles = ['json', 'yaml', 'yml'];
 
 test.each(formatsFiles)('diff formats of files (.json .yaml .yml)', (extension) => {
@@ -26,4 +28,5 @@ test.each(formatsFiles)('diff formats of files (.json .yaml .yml)', (extension) 
 
   expect(genDiff(file1, file2, 'stylish')).toEqual(expectedStylish);
   expect(genDiff(file1, file2, 'plain')).toEqual(expectedPlain);
+  expect(genDiff(file1, file2, 'json')).toEqual(expectedJson);
 });

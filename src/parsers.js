@@ -1,6 +1,6 @@
 import { load } from 'js-yaml';
 
-export const parsers = (data, format) => {
+const parsers = (data, format) => {
   switch (format) {
     case 'json':
       return JSON.parse(data);
@@ -8,6 +8,8 @@ export const parsers = (data, format) => {
     case 'yml':
       return load(data);
     default:
-      throw new Error('Unknown fornmat. You can use JSON or YAML formats.');
+      throw new Error('Invalid fornmat. You can use only JSON or YAML formats.');
   }
 };
+
+export default parsers;

@@ -1,16 +1,17 @@
 {
   "name": "@hexlet/code",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "main": "src/index.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
-  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test-watch": "npx -n '--experimental-vm-modules  --no-warnings' jest --watchAll"
   },
-  "author": "",
+  "author": "AkasunaKage",
   "license": "ISC",
   "dependencies": {
     "commander": "^9.4.0",
