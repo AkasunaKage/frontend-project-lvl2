@@ -14,10 +14,10 @@ Show difference between two files. Supporting formats: JSON, YML, YAML
 
 ## How to install
 
-Make sure you have installed Node.js no lower version 12: `node -v`
-Clone repository: `git@github.com:AkasunaKage/frontend-project-lvl2.git`
-Change directory to frontend-project-lvl2
-Run the command: `make install-deps`
+1. Make sure you have installed Node.js no lower version 12: `node -v`
+2. Clone repository: `git@github.com:AkasunaKage/frontend-project-lvl2.git`
+3. Change directory to frontend-project-lvl2
+4. Run the command: `make install-deps`
 
 ## Run tests
 
