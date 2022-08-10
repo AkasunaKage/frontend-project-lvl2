@@ -6,6 +6,7 @@ import getFormat from './formatters/index.js';
 
 const getFileFormat = (filepath) => extname(filepath).slice(1);
 
+// eslint-disable-next-line no-undef
 const getFilePath = (filepath) => resolve(process.cwd(), filepath).trim();
 
 const readFile = (filepath) => fs.readFileSync(getFilePath(filepath), 'utf-8');
