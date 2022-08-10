@@ -1,4 +1,4 @@
-import {resolve, extname} from 'path';
+import { resolve, extname } from 'path';
 import fs from 'fs';
 import buildTree from './buildTree.js';
 import parsers from './parsers.js';
@@ -10,7 +10,7 @@ const getFilePath = (filepath) => resolve(process.cwd(), filepath).trim();
 
 const readFile = (filepath) => fs.readFileSync(getFilePath(filepath), 'utf-8');
 
-  const genDiff = (filepath1, filepath2, format = 'stylish') => {
+  export const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const readFilepath1 = readFile(filepath1);
   const readFilepath2 = readFile(filepath2);
   const file1 = parsers(readFilepath1, getFileFormat(filepath1));
@@ -20,5 +20,3 @@ const readFile = (filepath) => fs.readFileSync(getFilePath(filepath), 'utf-8');
 
   return getFormat(diffTree, format);
 };
-
-export default genDiff;
