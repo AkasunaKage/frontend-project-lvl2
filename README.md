@@ -10,7 +10,7 @@
 
 Show difference between two files. Supporting formats: JSON, YML, YAML
 
-[![asciicast](https://asciinema.org/a/yfuUt9UibK8kd9WzEf2KznImA.svg)](https://asciinema.org/a/yfuUt9UibK8kd9WzEf2KznImA)
+ [![asciicast](https://asciinema.org/a/BTqdzMmuZTXYyVyDtSrPsroN1.svg)](https://asciinema.org/a/BTqdzMmuZTXYyVyDtSrPsroN1)
 
 ## How to install
 
@@ -38,4 +38,3 @@ Options:
   -r, --replacer <char>  output replacer (default: "    ")
   -h, --help             display help for command```
 
-  [![asciicast](https://asciinema.org/a/BTqdzMmuZTXYyVyDtSrPsroN1.svg)](https://asciinema.org/a/BTqdzMmuZTXYyVyDtSrPsroN1)
