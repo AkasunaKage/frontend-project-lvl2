@@ -10,7 +10,7 @@ const getFilePath = (filepath) => resolve(process.cwd(), filepath).trim();
 
 const readFile = (filepath) => readFileSync(getFilePath(filepath), 'utf-8');
 
-  const genDiff = (filepath1, filepath2, format = 'stylish') => {
+const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const readFilepath1 = readFile(filepath1);
   const readFilepath2 = readFile(filepath2);
   const file1 = parsers(readFilepath1, getFileFormat(filepath1));

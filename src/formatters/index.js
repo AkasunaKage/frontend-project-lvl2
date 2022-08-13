@@ -14,4 +14,4 @@ const getFormat = (data, format) => {
   }
 };
 
-  export default getFormat;
+export default getFormat;
