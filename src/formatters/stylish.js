@@ -20,30 +20,30 @@ const sign = {
 };
 
 const makeStylish = (diff, replacer = '    ') => {
-  const forTree = (tree, depth) => tree.map((node) => {
+  const iter = (tree, depth) => tree.map((node) => {
     const ind = replacer.repeat(depth);
     const indForSign = ind.slice(2);
 
-    const createLine = (value, mark) => `${indForSign}${mark} ${node.key}: ${stringify(value, depth, replacer)}`;
+    const makeLine = (value, mark) => `${indForSign}${mark} ${node.name}: ${stringify(value, depth, replacer)}`;
 
     switch (node.type) {
       case 'added':
-        return createLine(node.value, sign.added);
+        return makeLine(node.value, sign.added);
       case 'deleted':
-        return createLine(node.value, sign.deleted);
+        return makeLine(node.value, sign.deleted);
       case 'unchanged':
-        return createLine(node.value, sign.unchanged);
+        return makeLine(node.value, sign.unchanged);
       case 'changed':
-        return [`${createLine(node.firstValue, sign.deleted)}`,
-          `${createLine(node.secondValue, sign.added)}`].join('\n');
+        return [`${makeLine(node.firstValue, sign.deleted)}`,
+          `${makeLine(node.secondValue, sign.added)}`].join('\n');
       case 'nested':
-        return `${ind}${node.name}: ${['{', ...forTree(node.children, depth + 1), `${ind}}`].join('\n')}`;
+        return `${ind}${node.name}: ${['{', ...iter(node.children, depth + 1), `${ind}}`].join('\n')}`;
       default:
         throw new Error(`Type: ${node.type} is undefined`);
     }
   });
 
-  const stylishDiff = forTree(diff, 1);
+  const stylishDiff = iter(diff, 1);
   return ['{', ...stylishDiff, '}'].join('\n');
 };
 
