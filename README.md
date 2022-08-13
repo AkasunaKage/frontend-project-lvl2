@@ -10,7 +10,7 @@
 
 Show difference between two files. Supporting formats: JSON, YML, YAML
 
- [![asciicast](https://asciinema.org/a/BTqdzMmuZTXYyVyDtSrPsroN1.svg)](https://asciinema.org/a/BTqdzMmuZTXYyVyDtSrPsroN1)
+[![asciicast](https://asciinema.org/a/uos64alM7wduM0jr6U5XNOlBd.svg)](https://asciinema.org/a/uos64alM7wduM0jr6U5XNOlBd)
 
 ## How to install
 
