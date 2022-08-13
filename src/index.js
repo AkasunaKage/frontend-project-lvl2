@@ -6,12 +6,11 @@ import getFormat from './formatters/index.js';
 
 const getFileFormat = (filepath) => extname(filepath).slice(1);
 
-// eslint-disable-next-line no-undef
 const getFilePath = (filepath) => resolve(process.cwd(), filepath).trim();
 
 const readFile = (filepath) => fs.readFileSync(getFilePath(filepath), 'utf-8');
 
-  export const genDiff = (filepath1, filepath2, format = 'stylish') => {
+  const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const readFilepath1 = readFile(filepath1);
   const readFilepath2 = readFile(filepath2);
   const file1 = parsers(readFilepath1, getFileFormat(filepath1));
@@ -21,3 +20,5 @@ const readFile = (filepath) => fs.readFileSync(getFilePath(filepath), 'utf-8');
 
   return getFormat(diffTree, format);
 };
+
+export default genDiff;
