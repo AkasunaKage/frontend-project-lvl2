@@ -1,7 +1,7 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-const getFormat = (data, format) => {
+export default (data, format) => {
   switch (format) {
     case 'stylish':
       return stylish(data);
@@ -13,5 +13,3 @@ const getFormat = (data, format) => {
       throw new Error(`Invalid file format: '${format}'. You can use only JSON and YAML`);
   }
 };
-
-export default getFormat;

@@ -1,9 +1,8 @@
-install-deps:
+install:
 	npm ci
 	npm link
 publish:
 	npm publish --dry-run
-	npm link
 gendiff:
 	node bin/gendiff.js
 test:
