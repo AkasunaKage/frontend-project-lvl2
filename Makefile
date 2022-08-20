@@ -1,4 +1,4 @@
-install:
+make:
 	npm ci
 	npm link
 publish:
