@@ -9,27 +9,31 @@ const stringify = (value) => {
 };
 
 const makePlain = (diff) => {
-  const iter = (tree, ancestor) => tree.flatMap((node) => {
-    const path = [...ancestor, node.name].join('.');
-
-    switch (node.type) {
-      case 'added':
-        return `Property '${path}' was added with value: ${stringify(node.value)}`;
-      case 'deleted':
-        return `Property '${path}' was removed`;
-      case 'unchanged':
-        return null;
-      case 'changed':
-        return `Property '${path}' was updated. From ${stringify(node.firstValue)} to ${stringify(node.secondValue)}`;
-      case 'nested':
-        return `${_.compact(iter(node.children, [path])).join('\n')}`;
-      default:
-        throw new Error(`Type: ${node.type} is undefined`);
+  const iter = (tree, ancestor) => {
+    if (!_.isObject(tree)) {
+      return `${tree}`;
     }
-  });
 
-  const plainDiff = iter(diff, []);
-  return [...plainDiff].join('\n');
+    const makeFormatter = Object.entries(tree).map(([, node]) => {
+      switch (node.type) {
+        case 'added':
+          return `Property '${ancestor}${node.name}' was added with value: ${stringify(node.value)}`;
+        case 'deleted':
+          return `Property '${ancestor}${node.name}' was removed`;
+        case 'unchanged':
+          return null;
+        case 'changed':
+          return `Property '${ancestor}${node.name}' was updated. From ${stringify(node.firstValue)} to ${stringify(node.secondValue)}`;
+        case 'nested':
+          return iter(node.children, `${ancestor}${node.name}.`);
+        default:
+          throw new Error(`Type: ${node.type} is undefined`);
+      }
+    });
+
+    return _.compact([...makeFormatter]).join('\n');
+  };
+  return iter(diff, '');
 };
 
 export default makePlain;
