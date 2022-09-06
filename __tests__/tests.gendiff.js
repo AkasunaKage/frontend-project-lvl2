@@ -29,6 +29,9 @@ const formatsFiles = [
   {
     file1: 'file1.yml', file2: 'file2.yaml', formatter: 'json', check: 'json_res.txt',
   },
+  {
+    file1: 'file1.yml', file2: 'file2.yaml', formatter: undefined, check: 'stylish_res.txt',
+  },
 ];
 
 test.each(formatsFiles)('diff formats of files (.json .yaml .yml)', ({
@@ -37,9 +40,6 @@ test.each(formatsFiles)('diff formats of files (.json .yaml .yml)', ({
   const filepath1 = getFixturePath(file1);
   const filepath2 = getFixturePath(file2);
   const expected = readFile(check);
-  const expectedDefault = readFile(getFixturePath('stylish_res.txt'));
   const result = genDiff(filepath1, filepath2, formatter);
-  const resultDefaultFormatter = genDiff(filepath1, filepath2);
   expect(result).toEqual(expected);
-  expect(resultDefaultFormatter).toEqual(expectedDefault);
 });

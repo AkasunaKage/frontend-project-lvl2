@@ -5,25 +5,22 @@ const buildTree = (data1, data2) => {
   const sortedKeys = _.sortBy(uniqKeys);
 
   return sortedKeys.map((key) => {
-    const value1 = data1[key];
-    const value2 = data2[key];
-
     if (!_.has(data1, key)) {
-      return { name: key, value: value2, type: 'added' };
+      return { name: key, value: data2[key], type: 'added' };
     }
     if (!_.has(data2, key)) {
-      return { name: key, value: value1, type: 'deleted' };
+      return { name: key, value: data1[key], type: 'deleted' };
     }
-    if (_.isObject(value1) && _.isObject(value2)) {
-      return { name: key, children: buildTree(value1, value2), type: 'nested' };
+    if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+      return { name: key, children: buildTree(data1[key], data2[key]), type: 'nested' };
     }
-    if (!_.isEqual(value1, value2)) {
+    if (!_.isEqual(data1[key], data2[key])) {
       return {
-        name: key, firstValue: value1, secondValue: value2, type: 'changed',
+        name: key, firstValue: data1[key], secondValue: data2[key], type: 'changed',
       };
     }
 
-    return { name: key, value: value1, type: 'unchanged' };
+    return { name: key, value: data1[key], type: 'unchanged' };
   });
 };
 

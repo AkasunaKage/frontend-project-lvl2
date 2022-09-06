@@ -9,12 +9,9 @@ const stringify = (value) => {
 };
 
 const makePlain = (diff) => {
-  const iter = (tree, ancestor) => {
-    if (!_.isObject(tree)) {
-      return `${tree}`;
-    }
-
-    const makeFormatter = Object.entries(tree).map(([, node]) => {
+  const iter = (nodes, ancestor) => nodes
+    .filter((node) => node.type !== 'unchanged')
+    .map((node) => {
       switch (node.type) {
         case 'added':
           return `Property '${ancestor}${node.name}' was added with value: ${stringify(node.value)}`;
@@ -29,10 +26,7 @@ const makePlain = (diff) => {
         default:
           throw new Error(`Type: ${node.type} is undefined`);
       }
-    });
-
-    return _.compact([...makeFormatter]).join('\n');
-  };
+    }).join('\n');
   return iter(diff, '');
 };
 
