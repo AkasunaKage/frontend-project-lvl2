@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => resolve(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-const formatsFiles = [
+const testCases = [
   {
     file1: 'file1.json', file2: 'file2.json', formatter: 'stylish', check: 'stylish_res.txt',
   },
@@ -34,7 +34,7 @@ const formatsFiles = [
   },
 ];
 
-test.each(formatsFiles)('diff formats of files (.json .yaml .yml)', ({
+test.each(testCases)('diff formats of files (.json .yaml .yml)', ({
   file1, file2, formatter, check,
 }) => {
   const filepath1 = getFixturePath(file1);
