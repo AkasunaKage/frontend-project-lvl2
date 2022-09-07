@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { dirname, resolve } from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -12,34 +11,34 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 const testCases = [
   {
-    file1: 'file1.json', file2: 'file2.json', formatter: 'stylish', check: 'stylish_res.txt',
+    fileName1: 'file1.json', fileName2: 'file2.json', formatter: 'stylish', expectedFileName: 'stylish_res.txt',
   },
   {
-    file1: 'file1.yml', file2: 'file2.yaml', formatter: 'stylish', check: 'stylish_res.txt',
+    fileName1: 'file1.yml', fileName2: 'file2.yaml', formatter: 'stylish', expectedFileName: 'stylish_res.txt',
   },
   {
-    file1: 'file1.json', file2: 'file2.json', formatter: 'plain', check: 'plain_res.txt',
+    fileName1: 'file1.json', fileName2: 'file2.json', formatter: 'plain', expectedFileName: 'plain_res.txt',
   },
   {
-    file1: 'file1.yml', file2: 'file2.yaml', formatter: 'plain', check: 'plain_res.txt',
+    fileName1: 'file1.yml', fileName2: 'file2.yaml', formatter: 'plain', expectedFileName: 'plain_res.txt',
   },
   {
-    file1: 'file1.json', file2: 'file2.json', formatter: 'json', check: 'json_res.txt',
+    fileName1: 'file1.json', fileName2: 'file2.json', formatter: 'json', expectedFileName: 'json_res.txt',
   },
   {
-    file1: 'file1.yml', file2: 'file2.yaml', formatter: 'json', check: 'json_res.txt',
+    fileName1: 'file1.yml', fileName2: 'file2.yaml', formatter: 'json', expectedFileName: 'json_res.txt',
   },
   {
-    file1: 'file1.yml', file2: 'file2.yaml', formatter: undefined, check: 'stylish_res.txt',
+    fileName1: 'file1.yml', fileName2: 'file2.yaml', formatter: undefined, expectedFileName: 'stylish_res.txt',
   },
 ];
 
 test.each(testCases)('diff formats of files (.json .yaml .yml)', ({
-  file1, file2, formatter, check,
+  fileName1, fileName2, formatter, expectedFileName,
 }) => {
-  const filepath1 = getFixturePath(file1);
-  const filepath2 = getFixturePath(file2);
-  const expected = readFile(check);
+  const filepath1 = getFixturePath(fileName1);
+  const filepath2 = getFixturePath(fileName2);
+  const expected = readFile(expectedFileName);
   const result = genDiff(filepath1, filepath2, formatter);
   expect(result).toEqual(expected);
 });
